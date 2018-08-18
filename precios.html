@@ -4,6 +4,8 @@
 
 	<head>
 		<meta charset="utf-8">
+		<!-- "Viewport" cambia la vista de la pagina para que se vea como desde un celular al momento de inspeccionar los elementos-->
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<link href="https://fonts.googleapis.com/css?family=Allerta|Montserrat:400,700" rel="stylesheet">
 		<link rel="stylesheet" href="css/invie.css">
 		<title> WebDev - Precios </title>
@@ -20,7 +22,9 @@
 					<img src="images/invie.png" alt="Invie logo" width="186" height="60">
 				</figure>
 
-				<nav class="menu"> <!-- menú -->
+				<span class="burger-button icon-menu" id="burger-button"></span>
+
+				<nav class="menu" id="menu"> <!-- menú -->
 					<ul>
 						<li>
 							<a href="index.html">Home</a>
@@ -46,20 +50,27 @@
 							<th>Modelo</th>
 							<th>Precio</th>
 							<th>Descripción</th>
+							<th>Modelo</th>
+							<th>Precio</th>
+							<th>Descripción</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td>Invie Classic</td>
 							<td>$198</td>
-							<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua.</td>
+							<td>Una guitarra muy pro.</td>
+							<td>Invie Classic</td>
+							<td>$198</td>
+							<td>Una guitarra muy pro.</td>
 						</tr>
 						<tr>
 							<td>Invie Acustica</td>
 							<td>$225</td>
-							<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua.</td>
+							<td>Una guitarra muy pro.</td>
+							<td>Invie Acustica</td>
+							<td>$225</td>
+							<td>Una guitarra muy pro.</td>
 						</tr>
 					</tbody>
 				</table>
@@ -125,6 +136,61 @@
 				</form>
 			</div>
 		</footer>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/blazy/1.8.2/blazy.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+
+		<script type="text/javascript">
+
+			var consulta = window.matchMedia("(max-width: 500px)");
+			consulta.addListener(mediaQuery);
+
+			var $burgerButton = document.getElementById("burger-button");
+			var $menu = document.getElementById("menu");
+			function toggleMenu(){
+				$menu.classList.toggle("active")
+			};
+			
+			function showMenu(){
+				$menu.classList.add("active")
+			};
+
+			function hideMenu(){
+				$menu.classList.remove("active")
+			};
+			
+			function mediaQuery(){
+				if(consulta.matches){
+					console.log("Se cumple.");
+					$burgerButton.addEventListener("touchstart", toggleMenu);
+				}else{
+					console.log("No se cumple.");
+					$burgerButton.removeEventListener("touchstart", toggleMenu);
+				}				
+			}
+
+			mediaQuery();
+
+			//Lazy Loading.
+			var bLazy = new Blazy({
+    		selector: "img"
+			});
+			
+			//Gestures.
+			var $body = document.body;
+
+			var gesture = new Hammer($body);
+			
+			gesture.on('swiperight', showMenu);
+			gesture.on('swipeleft', hideMenu);
+			
+
+			
+
+			
+
+		</script>
+		
 	</body>
 
 
